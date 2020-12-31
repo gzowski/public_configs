@@ -1,0 +1,149 @@
+[colors]
+background = ${xrdb:color0:#222}
+foreground = ${xrdb:color7:#222}
+foreground-alt = ${xrdb:color7:#222}
+col0 = ${xrdb:color0:#222}
+col1 = ${xrdb:color1:#222}
+col2 = ${xrdb:color2:#222}
+col3 = ${xrdb:color3:#222}
+col4 = ${xrdb:color4:#222}
+col5 = ${xrdb:color5:#222}
+col6 = ${xrdb:color6:#222}
+col7 = ${xrdb:color7:#222}
+
+[bar/panel]
+monitor = ${env:MONITOR:}
+width = 100%
+height = 20 
+fixed-center = true
+radius = 0
+background = ${colors.background}
+foreground = ${colors.foreground}
+line-size = 1
+line-color = ${colors.foreground}
+padding-left = 1
+padding-right = 1
+module-margin-left = 1
+module-margin-right = 1
+border-color = #00000000
+
+;FONTS TO USE
+font-0 = Fira Mono:pixelsize=10;2
+font-1 = Font Awesome 5 Free Regular:pixelsize=10;2
+font-2 = FontAwesome:pixelsize=10;2
+font-3 = Font Awesome 5 Brands Regular:pixelsize=10;2
+dpi=0
+;MODULE POSITIONS
+modules-left = workspaces xwindow
+modules-right = kernel filesystem memory cpu sound date 
+wm-restack = i3
+override-redirect = false
+tray-padding = 2
+module-margin = 2
+tray-position = right
+tray-background = ${colors.col4}
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[module/kernel]
+type = custom/script
+exec = uname -r
+interval = 600
+format = " <label>"
+label = %output%
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:60:...%
+
+[module/workspaces]
+type = internal/i3
+enable-click = true
+enable-scroll = false
+strip-wsnumbers = true
+format = <label-state> <label-mode>
+pin-workspaces = true
+
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+ws-icon-4 = 5;
+ws-icon-5 = 6;
+ws-icon-6 = 7;
+ws-icon-7 = 8;
+ws-icon-8 = 9;
+ws-icon-9 = 10;
+
+label-focused = %name%
+label-visible = %name%
+label-invisible = %name%
+label-unfocused = %name%
+label-urgent = %name%
+label-focused-padding = 1
+label-unfocused-padding = 1
+label-visible-padding = 1
+label-invisible-padding = 1
+label-urgent-padding = 1
+label-focused-foreground = ${colors.col7}
+label-unfocused-foreground = ${colors.col7}
+label-urgent-foreground = ${colors.col0}
+label-focused-background = ${colors.col4}
+label-urgent-background = ${colors.col7}
+label-focused-underline = ${colors.col7}
+label-urgent-underline = ${colors.col3}
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = ""
+format-prefix-foreground = ${colors.foreground}
+label = %percentage:2%%
+
+[module/memory]
+type = internal/memory
+interval = 2
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground}
+label = %percentage_used%%
+background = ${colors.col0}
+
+[module/filesystem]
+type = internal/fs
+mount-0 = /
+mount-1 = /media/DATAHDD
+interval= 60
+fixed-values = true
+spacing = 2
+format-mounted = <label-mounted>
+label-mounted =  %mountpoint% %free%
+
+[module/date]
+type = internal/date
+interval = 1
+date = "%{A1:zenity --calendar:} %d/%m/%Y%{A}"
+time = %H:%M:%S
+format-prefix = 
+format-prefix-foreground = ${colors.foreground}
+label = %date% %time%
+
+
+[module/sound]
+type = internal/alsa
+format-volume = <ramp-volume> <label-volume>
+label-volume = %percentage%%
+format-muted-prefix = " "
+label-muted = Muted
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-volume-3 = 
+ramp-volume-4 = 
+ramp-volume-5 = 
+ramp-volume-6 = 
+
+[global/wm]
+margin-top = 0 
+margin-bottom = 0

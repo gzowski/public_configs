@@ -1,0 +1,183 @@
+#Always Exec
+set $exec exec --no-startup-id
+exec_always --no-startup-id picom -bc
+$exec ~/.config/wal/wal_steam/wal_steam.py
+exec_always --no-startup-id wal -R
+exec_always --no-startup-id ~/.config/polybar/launch.sh &
+#Startup Exec
+$exec xrandr --output DisplayPort-0 --primary --mode 1920x1080 --rate 74.97 --output DisplayPort-1 --mode 1920x1200 --rate 59.95 --right-of DisplayPort-0
+$exec i3-msg 'workspace $ws2; workspace $ws7'
+$exec discord 
+#Window Specific Exec
+$exec i3-msg 'workspace $ws7; exec termite -e irssi'
+
+#Set Variables
+set $ws1 "1 "
+set $ws2 "2 " 
+set $ws3 "3 "
+set $ws4 "4 "
+set $ws5 "5 " 
+set $ws6 "6 "
+set $ws7 "7 "
+set $ws8 "8 "
+set $ws9 "9 "
+set $ws10 "10 "
+set $mod Mod4
+set $modalt Mod1
+set_from_resource $col0 i3wm.color0 #f0f0f0
+set_from_resource $col1 i3wm.color1 #f0f0f0
+set_from_resource $col2 i3wm.color2 #f0f0f0
+set_from_resource $col3 i3wm.color3 #f0f0f0
+set_from_resource $col4 i3wm.color4 #f0f0f0
+set_from_resource $col5 i3wm.color5 #f0f0f0
+set_from_resource $col6 i3wm.color6 #f0f0f0
+set_from_resource $col7 i3wm.color7 #f0f0f0
+set_from_resource $col8 i3wm.color8 #f0f0f0
+set_from_resource $col9 i3wm.color9 #f0f0f0
+set_from_resource $col10 i3wm.color10 #f0f0f0
+set_from_resource $col11 i3wm.color11 #f0f0f0
+set_from_resource $col12 i3wm.color12 #f0f0f0
+set_from_resource $col13 i3wm.color13 #f0f0f0
+set_from_resource $col14 i3wm.color14 #f0f0f0
+set_from_resource $col15 i3wm.color15 #f0f0f0
+
+#Floating Windows
+floating_modifier $mod
+for_window [window_role="About"] floating enable
+for_window [title="Authy"] floating enable
+for_window [workspace=$ws1] layout tabbed
+#Launchers
+bindsym --release $mod+Print $exec maim ~/Pictures/Screenshots/$(date +%s).png
+bindsym --release Print $exec maim -s | xclip -selection clipboard -t image/png
+bindsym --release $mod+F4 $exec xkill
+bindsym XF86AudioRaiseVolume $exec pamixer -i 5
+bindsym XF86AudioLowerVolume $exec pamixer -d 5
+bindsym XF86AudioMute $exec pamixer -t
+bindsym $mod+l $exec i3lock -c 000000
+bindsym $mod+Return $exec termite
+bindsym $mod+q kill
+bindsym $modalt+F4 kill
+bindsym $mod+d $exec rofi -show drun -show-icons -font "Fira Mono 10"
+
+#Follow Mouse
+focus_follows_mouse true
+
+#Focus Windows
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+#Move Windows
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+#splitting
+bindsym $mod+h split h
+bindsym $mod+v split v
+
+#enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+#change container layout (stacked, tabbed, toggle split)
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+#toggle tiling / floating
+bindsym $mod+space floating toggle
+
+#Workspaces and Default Locations
+workspace 1 output DisplayPort-0
+assign [class="Steam"] $ws1
+assign [class="Lutris"] $ws1
+assign [class="battle.net.exe"] $ws1
+workspace 2 output DisplayPort-0
+assign [class="firefox"] $ws2
+workspace 3 output DisplayPort-0
+assign [class="Thunderbird"] $ws3
+workspace 4 output DisplayPort-0
+workspace 5 output DisplayPort-0
+workspace 6 output DisplayPort-1
+assign [class="teams-for-linux"] $ws6
+assign [class="remmina*"] $ws5
+assign [class="outlook-nativefier-8c9fad"] $ws6
+workspace 7 output DisplayPort-1
+assign [class="discord"] $ws7
+assign [class="whatsapp-for-linux"] $ws7
+workspace 8 output DisplayPort-1
+assign [class="vlc"] $ws8
+assign [class="Spotify"] $ws8
+workspace 9 output DisplayPort-1
+assign [class="Tor-Browser"] $ws9
+workspace 10 output Displayport-1
+assign [class="obs"] $ws10
+assign [class="twitchdeck-nativefier-c52b8d"] $ws10
+
+#Move and Switch
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6 
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'System Shutdown Menu (Choose an option or click X)' -B 'Exit i3' 'i3-msg exit' -B 'Reboot' 'systemctl reboot' -B 'Shutdown' 'systemctl poweroff'"
+
+mode "resize" {
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+bindsym $mod+r mode "resize"
+#Customisation
+font pango:Fira Mono 10
+for_window [class="^.*"] border pixel 1
+gaps inner 6
+#gaps outer 0
+
+client.focused          $col4     $col4     $col7  $col2       $col7
+client.focused_inactive $col1     $col1     $col7  $col2       $col3
+client.unfocused        $col1     $col1     $col7  $col2       $col3
+client.urgent           $col7     $col7     $col0  $col7       $col6
+client.placeholder      $col7     $col7     $col0  $col7       $col6
+client.background       $col0
+#bar {
+#    colors {
+#    background $col0
+#    statusline $col7
+#    separator  $col2
+#    focused_workspace  $col4 $col4 $col7 #7
+#    active_workspace   $col1 $col1 $col7 #7
+#    inactive_workspace $col1 $col1 $col7 #7
+#    urgent_workspace   $col6 $col7 $col0
+#    binding_mode       $col6 $col7 $col0
+#  }    
+#    status_command i3blocks -c ~/.i3blocks.conf
+#    position top
+#    height 20
+#    tray_padding 1
+#    tray_output DisplayPort-0
+#}
