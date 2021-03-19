@@ -1,4 +1,5 @@
 [colors]
+
 background = ${xrdb:color0:#222}
 foreground = ${xrdb:color7:#222}
 foreground-alt = ${xrdb:color7:#222}
@@ -12,70 +13,74 @@ col6 = ${xrdb:color6:#222}
 col7 = ${xrdb:color7:#222}
 
 [bar/panel]
+bottom = false
 monitor = ${env:MONITOR:}
 width = 100%
-height = 20 
+height = 25
 fixed-center = true
-radius = 0
 background = ${colors.background}
 foreground = ${colors.foreground}
-line-size = 1
+line-size = 2
 line-color = ${colors.foreground}
 padding-left = 1
 padding-right = 1
 module-margin-left = 1
 module-margin-right = 1
-border-color = #00000000
+border-top = 0
+border-left = 0
+border-right = 0
+border-bottom = 0
 
-;FONTS TO USE
-font-0 = Fira Mono:pixelsize=10;2
-font-1 = Font Awesome 5 Free Regular:pixelsize=10;2
+font-0 = Fira Mono:style=Regular:pixelsize=10;2
+font-1 = Font Awesome 5 Free Regular:pixelsize=10;1
 font-2 = FontAwesome:pixelsize=10;2
-font-3 = Font Awesome 5 Brands Regular:pixelsize=10;2
+font-3 = Font Awesome 5 Brands Regular:pixelsize=10;1
+
 dpi=0
-;MODULE POSITIONS
 modules-left = workspaces xwindow
-modules-right = kernel filesystem memory cpu sound date 
-wm-restack = i3
+modules-center =
+modules-right = spotify-music filesystem memory cpu sound date 
 override-redirect = false
 tray-padding = 2
-module-margin = 2
+tray-radius-bottom = 10
+module-margin = right
 tray-position = right
-tray-background = ${colors.col4}
-
 cursor-click = pointer
 cursor-scroll = ns-resize
 
-[module/kernel]
+[module/spotify-music]
 type = custom/script
-exec = uname -r
-interval = 600
-format = " <label>"
-label = %output%
+exec = ~/.config/polybar/scripts/spotify-music.sh
+click-left = playerctl --player=spotify play-pause
+click-middle = playerctl --player=spotify previous
+click-right = playerctl --player=spotify next
+format = <label>
+label = " %output:0:50:...%"
+interval = 1
 
 [module/xwindow]
 type = internal/xwindow
-label = %title:0:60:...%
+format = <label>
+label = "%title:0:50:...%"
 
 [module/workspaces]
-type = internal/i3
+type = internal/xworkspaces
 enable-click = true
-enable-scroll = false
-strip-wsnumbers = true
-format = <label-state> <label-mode>
+enable-scroll = true
 pin-workspaces = true
+icon-0 = 1;
+icon-1 = 2;
+icon-2 = 3;
+icon-3 = 4;
+icon-4 = 5;
+icon-5 = 6;
+icon-6 = 7;
+icon-7 = 8;
+icon-8 = 9;
+icon-9 = 10;
 
-ws-icon-0 = 1;
-ws-icon-1 = 2;
-ws-icon-2 = 3;
-ws-icon-3 = 4;
-ws-icon-4 = 5;
-ws-icon-5 = 6;
-ws-icon-6 = 7;
-ws-icon-7 = 8;
-ws-icon-8 = 9;
-ws-icon-9 = 10;
-
+format = <label-state>
+format-padding = 1
 label-focused = %name%
 label-visible = %name%
 label-invisible = %name%
@@ -85,57 +90,52 @@ label-focused-padding = 1
 label-unfocused-padding = 1
 label-visible-padding = 1
 label-invisible-padding = 1
+
+label-empty-padding = 1
+label-occupied-padding = 1
+label-active-padding = 1
 label-urgent-padding = 1
-label-focused-foreground = ${colors.col7}
-label-unfocused-foreground = ${colors.col7}
+label-empty-foreground = ${colors.col7}
+label-occupied-foreground = ${colors.col7} 
+label-active-foreground = ${colors.col1}
 label-urgent-foreground = ${colors.col0}
-label-focused-background = ${colors.col4}
 label-urgent-background = ${colors.col7}
-label-focused-underline = ${colors.col7}
-label-urgent-underline = ${colors.col3}
 
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = ""
 format-prefix-foreground = ${colors.foreground}
-label = %percentage:2%%
+label =  %percentage:2%%
 
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = " "
 format-prefix-foreground = ${colors.foreground}
-label = %percentage_used%%
-background = ${colors.col0}
+label =  %percentage_used%%
 
 [module/filesystem]
 type = internal/fs
 mount-0 = /
-mount-1 = /media/DATAHDD
-interval= 60
+interval = 60
 fixed-values = true
-spacing = 2
+spacing = 0
 format-mounted = <label-mounted>
-label-mounted =  %mountpoint% %free%
+label-mounted = " %free%"
 
 [module/date]
 type = internal/date
 interval = 1
-date = "%{A1:zenity --calendar:} %d/%m/%Y%{A}"
-time = %H:%M:%S
-format-prefix = 
-format-prefix-foreground = ${colors.foreground}
-label = %date% %time%
-
+date = "%d/%m"
+time = "%H:%M:%S"
+label = "%{A1:zenity --calendar:} %date% %time%%{A}"
 
 [module/sound]
-type = internal/alsa
+use-ui-max = false
+type = internal/pulseaudio
 format-volume = <ramp-volume> <label-volume>
 label-volume = %percentage%%
-format-muted-prefix = " "
-label-muted = Muted
-
+label-muted =  Muted
+label-muted-foreground = #FF0000
 ramp-volume-0 = 
 ramp-volume-1 = 
 ramp-volume-2 = 
