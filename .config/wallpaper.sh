@@ -8,6 +8,7 @@ path=~/Pictures/WP/script/
 rm -rf $path*
 #Screen Resolution
 resolution='1920x1080'
+
 urla='https://wallhaven.cc/search?q='
 urlb='&categories=110&purity=100&resolutions='
 urlc='&sorting=random&order=desc'
