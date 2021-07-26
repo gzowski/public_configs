@@ -39,7 +39,7 @@ font-3 = Font Awesome 5 Brands Regular:pixelsize=10;1
 dpi=0
 modules-left = workspaces xwindow
 modules-center =
-modules-right = spotify-music filesystem memory cpu sound date 
+modules-right = filesystem memory cpu sound date 
 override-redirect = false
 tray-padding = 2
 tray-radius-bottom = 10
@@ -47,16 +47,6 @@ module-margin = right
 tray-position = right
 cursor-click = pointer
 cursor-scroll = ns-resize
-
-[module/spotify-music]
-type = custom/script
-exec = ~/.config/polybar/spotify-music.sh
-click-left = playerctl --player=spotify play-pause
-click-middle = playerctl --player=spotify previous
-click-right = playerctl --player=spotify next
-format = <label>
-label = " %output:0:50:...%"
-interval = 1
 
 [module/xwindow]
 type = internal/xwindow
