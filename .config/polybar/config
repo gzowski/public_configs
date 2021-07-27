@@ -3,136 +3,259 @@
 background = ${xrdb:color0:#222}
 foreground = ${xrdb:color7:#222}
 foreground-alt = ${xrdb:color7:#222}
-col0 = ${xrdb:color0:#222}
-col1 = ${xrdb:color1:#222}
-col2 = ${xrdb:color2:#222}
-col3 = ${xrdb:color3:#222}
-col4 = ${xrdb:color4:#222}
-col5 = ${xrdb:color5:#222}
-col6 = ${xrdb:color6:#222}
-col7 = ${xrdb:color7:#222}
+inactive = ${xrdb:color8:#222}
+warning = ${xrdb:color1:#222}
+active = ${xrdb:color7:#222}
+activefg = ${xrdb:color7:#222}
+spotify = ${xrdb:color6:#222}
+backpad = ${xrdb:color0:#222}
+icons = ${xrdb:color3:#222}
 
 [bar/panel]
 bottom = false
 monitor = ${env:MONITOR:}
 width = 100%
 height = 25
+radius = 0
 fixed-center = true
 background = ${colors.background}
 foreground = ${colors.foreground}
-line-size = 2
-line-color = ${colors.foreground}
-padding-left = 1
-padding-right = 1
-module-margin-left = 1
-module-margin-right = 1
-border-top = 0
-border-left = 0
-border-right = 0
-border-bottom = 0
-
-font-0 = Fira Mono:style=Regular:pixelsize=10;2
-font-1 = Font Awesome 5 Free Regular:pixelsize=10;1
-font-2 = FontAwesome:pixelsize=10;2
-font-3 = Font Awesome 5 Brands Regular:pixelsize=10;1
-
+module-margin-left = 0
+module-margin-right = 0
+font-0 = Source Code Pro:style=Regular:pixelsize=10;2
+font-1 = Iosevka Nerd Font:style=Regular:pixelsize=10;2
 dpi=0
-modules-left = workspaces xwindow
-modules-center =
-modules-right = filesystem memory cpu sound date 
+modules-left = xwindow spotify-music
+modules-center = workspaces
+modules-right = vpnstatuses filesystem memory tempcpu tempgpu sound date
 override-redirect = false
-tray-padding = 2
-tray-radius-bottom = 10
+tray-padding = 1
 module-margin = right
 tray-position = right
+tray-background = ${colors.backpad}
 cursor-click = pointer
 cursor-scroll = ns-resize
+wm-restack = bspwm
+
+[bar/panelwork]
+bottom = false
+monitor = ${env:MONITOR:}
+width = 100%
+height = 25
+radius = 0
+fixed-center = true
+background = ${colors.background}
+foreground = ${colors.foreground}
+module-margin-left = 0
+module-margin-right = 0
+font-0 = Source Code Pro:style=Regular:pixelsize=22;2
+font-1 = Iosevka Nerd Font:style=Regular:pixelsize=22;2
+dpi=0
+modules-left = xwindow
+modules-center = workspaces
+modules-right = battery filesystem memory tempcpu sound date
+override-redirect = false
+tray-padding = 1
+module-margin = right
+tray-position = right
+tray-background = ${colors.backpad}
+cursor-click = pointer
+cursor-scroll = ns-resize
+wm-restack = bspwm
+
+[module/battery]
+type = internal/battery
+full-at = 99
+battery = BAT0
+adapter = ADP1
+pol-interval = 5
+time-format = %H:%M
+format-charging = <label-charging>
+format-discharging = <label-discharging>
+label-charging = %percentage%%
+label-discharging = %percentage%%
+label-full = Full
+
+[module/vpnstatuses]
+type = custom/script
+exec = vpnstatus
+format = <label>
+format-prefix = " "
+label-foreground = ${colors.foreground}
+format-prefix-foreground = ${colors.icons}
+click-left = "piactl connect"
+click-right = "piactl disconnect"
+interval = 5
+format-padding = 1
+format-background = ${colors.backpad}
+
+[module/spotify-music]
+type = custom/script
+exec = spotify-music
+click-left = playerctl --player=spotify play-pause
+click-middle = playerctl --player=spotify previous
+click-right = playerctl --player=spotify next
+format = <label>
+label = "%output:0:45:...%"
+format-prefix = " "
+label-foreground = ${colors.foreground}
+format-prefix-foreground = ${colors.spotify}
+interval = 1
+format-padding = 1
+format-background = ${colors.background}
 
 [module/xwindow]
 type = internal/xwindow
 format = <label>
-label = "%title:0:50:...%"
-
+label = "%title:0:45:...%"
+format-prefix-foreground = ${colors.icons}
+format-prefix = " "
+label-foreground = ${colors.foreground}
+format-padding = 1
+label-empty = " "
 [module/workspaces]
 type = internal/xworkspaces
 enable-click = true
 enable-scroll = true
 pin-workspaces = true
-icon-0 = 1;
-icon-1 = 2;
-icon-2 = 3;
-icon-3 = 4;
-icon-4 = 5;
-icon-5 = 6;
-icon-6 = 7;
-icon-7 = 8;
-icon-8 = 9;
-icon-9 = 10;
-
+icon-0 = 1;6
+icon-1 = 2;7
+icon-2 = 3;8
+icon-3 = 4;9
+icon-4 = 5;10
+icon-5 = 6;1
+icon-6 = 7;2
+icon-7 = 8;3
+icon-8 = 9;4
+icon-9 = 10;5
 format = <label-state>
-format-padding = 1
-label-focused = %name%
-label-visible = %name%
-label-invisible = %name%
-label-unfocused = %name%
-label-urgent = %name%
-label-focused-padding = 1
-label-unfocused-padding = 1
-label-visible-padding = 1
-label-invisible-padding = 1
-
+format-padding = 0
+label-urgent = 
+label-active = 
+label-empty = 
+label-occupied = 
 label-empty-padding = 1
 label-occupied-padding = 1
 label-active-padding = 1
 label-urgent-padding = 1
-label-empty-foreground = ${colors.col7}
-label-occupied-foreground = ${colors.col7} 
-label-active-foreground = ${colors.col1}
-label-urgent-foreground = ${colors.col0}
-label-urgent-background = ${colors.col7}
+
+label-empty-foreground = ${colors.foreground-alt}
+label-empty-background = ${colors.background}
+label-occupied-foreground = ${colors.foreground}
+label-occupied-background = ${colors.background} 
+label-active-foreground = ${colors.active}
+label-active-background = ${colors.background}
+label-urgent-foreground = ${colors.warning}
+label-urgent-background = ${colors.bacckground}
 
 [module/cpu]
 type = internal/cpu
-interval = 2
-format-prefix-foreground = ${colors.foreground}
-label =  %percentage:2%%
+interval = 5
+format-prefix = " "
+format-prefix-foreground = ${colors.icons}
+label = %percentage%%
+format-padding = 1
+format-background = ${colors.backpad}
+
+[module/tempcpu]
+type = internal/temperature
+interval = 1
+thermal-zone = 0
+hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon1/temp1_input
+base-temperature = 30
+warn-temperature = 80
+format = <ramp> <label>
+ramp-0 = "" 
+ramp-1 = ""
+ramp-2 = ""
+ramp-3 = ""
+ramp-4 = ""
+ramp-foreground = ${colors.icons}
+label = %temperature-c%
+format-background = ${colors.backpad}
+label-warn = " %temperature-c%"
+label-warn-foreground = ${colors.warning}
+#label-warn-background = ${colors.backpad}
+label-warn-padding = 1
+format-padding = 1
+
+[module/tempgpu]
+type = internal/temperature
+interval = 1
+thermal-zone = 0
+hwmon-path = /sys/devices/pci0000:00/0000:00:03.0/0000:03:00.0/0000:04:00.0/0000:05:00.0/hwmon/hwmon2/temp2_input
+base-temperature = 30
+warn-temperature = 80
+format = <ramp> <label>
+ramp-0 = ""
+ramp-1 = ""
+ramp-2 = ""
+ramp-3 = ""
+ramp-4 = ""
+ramp-foreground = ${colors.icons}
+label = %temperature-c%
+format-background = ${colors.backpad}
+label-warn = " %temperature-c%"
+label-warn-background = ${colors.backpad}
+label-warn-foreground = ${colors.warning}
+label-warn-padding = 1
+format-padding = 1
 
 [module/memory]
 type = internal/memory
-interval = 2
-format-prefix-foreground = ${colors.foreground}
-label =  %percentage_used%%
+interval = 5
+format-prefix = " "
+format-prefix-foreground = ${colors.icons}
+label = %gb_used%
+format-padding = 1
+format-background = ${colors.backpad}
+bar-used-indicator =
+bar-used-width = 50
+bar-used-foreground-0 = #55aa55
+bar-used-foreground-1 = #557755
+bar-used-foreground-2 = #f5a70a
+bar-used-foreground-3 = #ff5555
+bar-used-fill = ▐
+bar-used-empty = ▐
+bar-used-empty-foreground = #444444
 
 [module/filesystem]
 type = internal/fs
 mount-0 = /
-interval = 60
+interval = 30
 fixed-values = true
 spacing = 0
-format-mounted = <label-mounted>
-label-mounted = " %free%"
+format-mounted = " <label-mounted>"
+label-mounted = "%free%"
+label-mounted-foreground = ${colors.foreground}
+format-mounted-foreground = ${colors.icons}
+format-mounted-padding = 1
+format-mounted-background = ${colors.backpad}
 
 [module/date]
 type = internal/date
 interval = 1
 date = "%d/%m"
 time = "%H:%M:%S"
-label = "%{A1:zenity --calendar:} %date% %time%%{A}"
+format-prefix = " "
+format-prefix-foreground = ${colors.icons}
+label = "%{A1:zenity --calendar:}%date% %time%%{A}"
+format-padding = 1
+format-background = ${colors.backpad}
 
 [module/sound]
 use-ui-max = false
 type = internal/pulseaudio
-format-volume = <ramp-volume> <label-volume>
-label-volume = %percentage%%
-label-muted =  Muted
-label-muted-foreground = #FF0000
-ramp-volume-0 = 
-ramp-volume-1 = 
-ramp-volume-2 = 
-ramp-volume-3 = 
-ramp-volume-4 = 
-ramp-volume-5 = 
-ramp-volume-6 = 
+format-volume =  <label-volume>
+label-volume = %percentage:3%%
+label-volume-foreground = ${colors.foreground}
+format-volume-foreground = ${colors.icons}
+label-muted = " Mute"
+label-muted-padding = 1
+label-muted-foreground = ${colors.warning}
+#label-muted-background = ${colors.backpad}
+format-volume-padding = 1
+format-volume-background = ${colors.backpad}
 
 [global/wm]
 margin-top = 0 
