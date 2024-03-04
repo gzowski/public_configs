@@ -1,7 +1,0 @@
-configuration {
-	font: "Fira Mono 9";
-	theme: "~/.cache/wal/colors-rofi-dark.rasi";
-        modi: "window,drun,ssh,combi";
-	terminal: "i3-sensible-terminal";
-	height: 20;
-}
