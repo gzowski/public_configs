@@ -1,14 +1,14 @@
 @import url("../../.cache/wal/colors-waybar.css");
 
 * {
-    border: 0;
+    border: 0px;
     font-family: 'Source Code Pro';
     font-size: 16px;
-    min-height: 0;
+    min-height: 0px;
 }
 
 window > box {
-margin: 10 10 0 10;
+margin: 10px 5px 0px 5px;
 background-color: rgba(0,0,0,0);
 }
 window#waybar {
@@ -16,62 +16,40 @@ window#waybar {
     color: @color7;
 }
 #workspaces button {
-    border-radius: 0;
+    border-radius: 0px;
     color: @color7;
-    border-top: 2px solid transparent;
 }
 #workspaces {
     color: @color7;
+    border: 0px;
+    box-shadow: inherit;
 }
 
 #workspaces button {
     background-color: transparent;
+    color: @color8;
 }
 #workspaces button:hover {
-    color: @color7;
+    color: @color4;
     background-color: transparent;
 }
 #workspaces button.visible {
     color: @color7;
-    border-top: 2px solid transparent;
 }
 #workspaces button.focused {
-    border-top: 2px solid @color3;
-    color: @color7;
+    color: @color8;
 }
 #workspaces button.active {
-    border-top: 2px solid @color3;
     color: @color7;
 }
 #workspaces button.urgent {
     color: @color1;
-    border-top: 2px solid @color1;
 }
 .modules-center {
-  background-color: transparent;
-  border-radius: 0px;
-  border: 0px;
 }
 .modules-left {
-  background-color: @transbg;
-  border-radius: 7px;
-  border: 2px solid @color8; 
-  padding-left: 5px;
-  padding-right: 5px;
 }
 .modules-right {
-  font-family: 'Source Code Pro';
-  padding-right: 10px;
-  padding-left: 5px;
-  background-color: @transbg;
-  border-radius: 7px;
-  border: 2px solid @color8;
-  color: @color7;
-}
-
-#mode {
-    background-color: @color7;
-    color: @color0;
 }
 #tray, 
 #mode, 
@@ -84,11 +62,20 @@ window#waybar {
 #disk,
 #custom-dot,
 #custom-vpnstatus,
-#workspaces
+#workspaces,
+#custom-updates,
+#taskbar
 {
-    margin: 0 0px;
-    padding-left: 5px;
-    padding-right: 5px;
+background-color: @transbg;
+  border-radius: 7px;
+  border-top: 2px solid @color8;
+  border-left: 2px solid @color8;
+  border-right: 2px solid @color8;
+  border-bottom: 2px solid @color8;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 @keyframes blink {
     to {
@@ -122,8 +109,4 @@ label:focus {
 }
 #clock {
 }
-#temperature {
-
-}
-#temperature.critical {
-}
+	
